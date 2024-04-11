@@ -1,16 +1,19 @@
 # kubectl-multidoc
 
-Pipe your `kubectl get <resource> -oyaml` commands here to split the `.items[]`
+Pipe your `kubectl get <resource> -oyaml` commands here to split the `items`
 array into multidoc YAML. Then try piping it to
 [yamlgrep](https://github.com/tnyeanderson/yamlgrep) to filter it!
 
 ```bash
 go install github.com/tnyeanderson/kubectl-multidoc
+
+# Then
+kubectl get po -oyaml | kubectl multidoc
 ```
 
 This program reads a Kubernetes API response in YAML format (usually from
-"kubectl get <resource> -oyaml"), and outputs it as a YAML multidoc with
-each member of the "items" array as its own document.
+`kubectl get <resource> -oyaml`), and outputs it as a YAML multidoc with
+each member of the `items` array as its own document.
 
 Importantly, this program does not understand YAML. It does not attempt to
 load the YAML into memory, or to ensure it is valid. It checks for the
